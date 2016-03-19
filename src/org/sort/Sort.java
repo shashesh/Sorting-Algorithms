@@ -10,9 +10,7 @@ public class Sort {
 			swapped = false;
 			for(int i=0; i<a.length - j; i++) {
 				if(a[i] > a[i+1]) {
-					temp = a[i];
-					a[i] = a[i+1];
-					a[i+1] = temp;
+					swap(a, i, i+1);
 					swapped = true;
 				}
 			}
@@ -23,9 +21,7 @@ public class Sort {
 		for(int i=0; i<a.length; i++) {
 			for(int j=i; j>0; j--) {
 				if(a[j] < a[j-1]) {
-					int temp = a[j];
-					a[j] = a[j-1];
-					a[j-1] = temp;
+					swap(a, j, j-1);
 				}
 			}
 		}
