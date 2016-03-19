@@ -83,49 +83,46 @@ public class Sort {
 		}
 	}
 	
-	public static void quickSort(int[] a) {
-		int start = 0;
-		int end = a.length-1;
-		
-		quicksort(a, start, end);
-		
-	}
-
-	private static void quicksort(int[] a, int start, int end) {
-		
-		if(start<end) {	
-			int pIndex = Partition(a, start, end);
-			System.out.println();
-			System.out.println("Pindex: " + pIndex);
-			quicksort(a, start, pIndex-1);
-			System.out.println();
-			System.out.println("Pindex2: " + pIndex);
-			quicksort(a, pIndex+1, end);
-			System.out.println();
-			System.out.println("Pindex3: " + pIndex + " End: " + end);
+	public static void quickSort(int[] a) {	
+		if(a == null || a.length == 0) {
+			return;
 		}
+		quickSort(a, 0, a.length-1 );		
 	}
 
-	private static int Partition(int[] a, int start, int end) {
-		int pivot = a[end];
-		System.out.println();
-		System.out.println(pivot);
-		int pIndex = start;
+	private static void quickSort(int[] a, int lowerIndex, int higherIndex) {
+		int i= lowerIndex;
+		int j = higherIndex;
 		
-		for(int i=0; i<end; i++){
-			if(a[i] <= pivot) {
-				int temp = a[pIndex];
-				a[pIndex] = a[i];
-				a[i] = temp;
-				pIndex++;
+		int pivot = a[lowerIndex + (higherIndex-lowerIndex) / 2];
+		
+		while(i<=j) {
+			while(a[i] < pivot) {
+				i++;
+			}
+			
+			while(a[j] > pivot) {
+				j--;
+			}
+			
+			if(i<=j) {
+				swap(a, i,j);
+				i++; 
+				j--;
 			}
 		}
-		int temp = a[end];
-		a[end] = a[pIndex];
-		a[pIndex] = temp;
-		for(int i=0; i<a.length; i++) {
-		System.out.print(a[i]+ " "); 
+		if(lowerIndex < j) {
+			quickSort(a, lowerIndex, j);
 		}
-		return pIndex;
+		
+		if(i< higherIndex) {
+			quickSort(a, i, higherIndex);
+		}
+	}
+
+	private static void swap(int[] a, int i, int j) {
+		int temp = a[i];
+        a[i] = a[j];
+        a[j] = temp;
 	}
 }
